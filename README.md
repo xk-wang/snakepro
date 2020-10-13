@@ -5,7 +5,9 @@ github地址:https://github.com/silence1772/GreedySnake
 
 ## 一些改动
 
-- 之前所写的游戏先通过光标定位，在使用cout进行字符输出显示。原本代码没有更改光标显示，于是就造成了光标闪烁问题。解决方案：游戏运行过程中隐藏光标，游戏结束时恢复光标，参考stackoverflow https://stackoverflow.com/questions/18028808/remove-blinking-underscore-on-console-cmd-prompt.设置代码如下（位于tools.cpp中）:
+- 之前所写的游戏先通过光标定位，在使用cout进行字符输出显示。原本代码没有更改光标显示，于是就造成了光标闪烁问题。解决方案：游戏运行过程中隐藏光标，游戏结束时恢复光标，参考stackoverflow https://stackoverflow.com/questions/18028808/remove-blinking-underscore-on-console-cmd-prompt. 
+
+  设置代码如下（位于tools.cpp中）:
 
   ```c++
   void ShowConsoleCursor(bool showFlag)
@@ -24,12 +26,10 @@ github地址:https://github.com/silence1772/GreedySnake
 - 之前代码游戏结束后并没有恢复cmd文字颜色，导致有些奇怪，这里在游戏结束后进行了恢复，并重现光标，具体位于controller.cpp的Game()中
 
   ```c++
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED |
-  									                     FOREGROUND_GREEN |
-  									                     FOREGROUND_BLUE);
+  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
   ShowConsoleCursor(true);
   ```
-
+  
 - 调整了文件结构，源码和头文件分开，并尝试了g++编译和cmake编译
 
 
@@ -129,6 +129,8 @@ github地址:https://github.com/silence1772/GreedySnake
   > 本项目release下的snake.exe和snake2.exe没有考虑编码问题和动态编译问题，所以别的电脑会出现两个问题，一个是动态库丢失，还有就是中文乱码，乱码的临时解决方案是cmd输入chcp 65001设置cmd按照utf-8解码。
 
 - snake3.exe使用的是g++编译，设置了可执行程序编码GBK，以及使用静态编译，能够完好运行。但是体积有些大，后续还需要优化。
+
+- 移植到linux。
 
 ## 意见与反馈
 
